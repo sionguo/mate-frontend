@@ -1,30 +1,38 @@
-import reactLogo from './assets/react.svg';
-import { useCounter } from './store/counter';
-import viteLogo from '/vite.svg';
+import { AuthProvider, AuthProviderProps, useAuth } from 'react-oidc-context';
+import { BrowserRouter } from 'react-router-dom';
 
-import './App.css';
+import { authedRoutes, noneAuthedRoutes } from './route';
 
 function App() {
-  const { count, setCount } = useCounter();
+  const oidcConfig: AuthProviderProps = {
+    authority: import.meta.env.MATE_AUTHORITY,
+    client_id: import.meta.env.MATE_CLIENT_ID,
+    redirect_uri: `${window.location.origin}/callback`,
+    response_type: 'code',
+    scope: 'openid profile email offline_access',
+    post_logout_redirect_uri: `${window.location.origin}/`,
+    response_mode: 'query',
+    loadUserInfo: true,
+  };
+
+  const AuthGuard = () => {
+    const auth = useAuth();
+    if (auth.isLoading) {
+      return <>loading</>;
+    }
+    if (!auth.isAuthenticated) {
+      return <BrowserRouter>{noneAuthedRoutes}</BrowserRouter>;
+    }
+    if (auth.error) {
+      return <div>{auth.error.message}</div>;
+    }
+    return <BrowserRouter>{authedRoutes}</BrowserRouter>;
+  };
+
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount(count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <AuthProvider {...oidcConfig}>
+      <AuthGuard />
+    </AuthProvider>
   );
 }
 
