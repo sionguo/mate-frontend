@@ -1,5 +1,6 @@
-import { Navigate, Outlet, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 
+import Layout from '@/layout';
 import { Callback, Login } from '@/pages/auth';
 import {
   IconAutomation,
@@ -62,7 +63,7 @@ const generateRoutes = (routes: RouteConfig[]): JSX.Element[] => {
 
 export const authedRoutes = (
   <Routes>
-    <Route element={<Outlet />}>{generateRoutes(routes)}</Route>
+    <Route element={<Layout />}>{generateRoutes(routes)}</Route>
     <Route path="/" element={<Navigate to={routes[0].path} replace />} />
     <Route path="/login" element={<Navigate to="/" replace />} />
     <Route path="/callback" element={<Callback />} />
