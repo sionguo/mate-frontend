@@ -15,7 +15,7 @@ import {
   Tooltip,
   useColorMode,
 } from '@chakra-ui/react';
-import { IconMoonStars, IconSun, IconTriangle, IconUser } from '@tabler/icons-react';
+import { IconMoonStars, IconSquareLetterG, IconSun, IconUser } from '@tabler/icons-react';
 
 const Layout = () => {
   const { pathname } = useLocation();
@@ -26,9 +26,9 @@ const Layout = () => {
     <Flex w="100vw" h="100vh">
       <Stack w="48px" align="center" borderRight={'1px solid gray'}>
         <Box borderBottom={'1px solid gray'}>
-          <IconButton aria-label="回到主页" icon={<IconTriangle />} as={Link} to={'/'} variant="ghost" />
+          <IconButton aria-label="回到主页" icon={<IconSquareLetterG />} as={Link} to={'/'} variant="ghost" />
         </Box>
-        <Grid padding="4px" gap="4px">
+        <Grid padding="4px" gap="4px" overflow="scroll">
           {routes.map(item => {
             return (
               <Tooltip key={item.path} label={item.name}>
