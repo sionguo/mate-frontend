@@ -38,6 +38,18 @@ export const routes: RouteConfig[] = [
   { name: '自动化', path: '/automation', icon: IconAutomation, component: <>自动化</> },
 ];
 
+const flattenTree = (tree: RouteConfig[]): RouteConfig[] => {
+  return tree.reduce((result: RouteConfig[], node: RouteConfig) => {
+    result.push(node);
+    if (node.children) {
+      result.push(...flattenTree(node.children));
+    }
+    return result;
+  }, []);
+};
+
+export const flattenRoutes = flattenTree(routes);
+
 /**
  * 生成路由树
  * @param routes 路由
