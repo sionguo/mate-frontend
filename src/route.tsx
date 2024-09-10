@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import Layout from '@/layout';
 import { Callback, Login } from '@/pages/auth';
+import Todo from '@/pages/todo';
 import {
   IconAutomation,
   IconCalendar,
@@ -25,7 +26,7 @@ export const routes: RouteConfig[] = [
     name: '任务',
     path: '/todos',
     icon: IconListCheck,
-    component: <>TODO</>,
+    component: <Todo />,
   },
   {
     name: '日历',
