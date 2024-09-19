@@ -12,6 +12,8 @@ import {
   IconPalette,
 } from '@tabler/icons-react';
 
+import BoardList from './pages/borad/BoardList';
+
 export interface RouteConfig {
   name: string;
   path: string;
@@ -35,7 +37,7 @@ export const routes: RouteConfig[] = [
     component: <>日历</>,
   },
   { name: '文件', path: '/files', icon: IconFiles, component: <>文件</> },
-  { name: '画板', path: '/draw', icon: IconPalette, component: <>画板</> },
+  { name: '画板', path: '/draw', icon: IconPalette, component: <BoardList /> },
   { name: '自动化', path: '/automation', icon: IconAutomation, component: <>自动化</> },
 ];
 
