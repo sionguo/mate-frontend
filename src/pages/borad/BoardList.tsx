@@ -6,7 +6,6 @@ import { IconPlus } from '@tabler/icons-react';
 
 const BoardList = () => {
   useEffect(() => {
-    console.log('useEffect', 'asd');
     getBoardList()
       .then(res => {
         console.log(res);
