@@ -1,12 +1,12 @@
 import request from '@/utils/request';
 
 interface Board {
-  id: string;
-  title: string;
-  content: string;
-  thumbnail: string;
-  createStamp: string;
-  lastModifiedStamp: string;
+  id?: string;
+  title?: string;
+  content?: string;
+  thumbnail?: string;
+  createStamp?: string;
+  lastModifiedStamp?: string;
 }
 export const getBoardList = (params?: object) => request.get<Board[]>('/boards', params);
 export const getBoardById = (id: string) => request.get<Board>(`/boards/${id}`);
