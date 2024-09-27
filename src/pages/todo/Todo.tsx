@@ -1,3 +1,4 @@
+import Tiptap from '@/components/editor';
 import { Flex, Stack } from '@chakra-ui/react';
 
 const Todo = () => {
@@ -6,7 +7,9 @@ const Todo = () => {
       <Stack w="240px" h="100%">
         <>侧边</>
       </Stack>
-      <Flex flexGrow="1">主</Flex>
+      <Flex flexGrow="1">
+        <Tiptap />
+      </Flex>
     </Flex>
   );
 };
